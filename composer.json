@@ -1,0 +1,11 @@
+{
+    "name": "beberlei/porpaginas",
+    "description": "Library that generically solves several pagination issues with DAO/repository abstractions.",
+    "license": "MIT",
+    "authors": [
+        {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de"}
+    ],
+    "autoload": {
+        "psr-0": {"Porpaginos\\": "src/"}
+    }
+}

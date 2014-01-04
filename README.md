@@ -27,20 +27,21 @@ interface Result extends Countable, IteratorAggregate
 {
     /**
      * @param int $offset
-     * @return Paginator
+     * @param int $limit
+     * @return Page
      */
     public function take($offset, $limit);
 
     /**
      * Return the number of all results in the paginatable.
-
+     *
      * @return int
      */
     public function count();
 
     /**
      * Return an iterator over all results of the paginatable.
-     * 
+     *
      * @return Iterator
      */
     public function getIterator();
@@ -52,7 +53,7 @@ either the full result or a paginated window of the result using ``take()``.
 One drawback is that the query is always lazily executed inside
 the ``Result`` and not directly in the repository.
 
-The ``Paginator`` interface returned from ``Result#take()``
+The ``Page`` interface returned from ``Result#take()``
 looks like this:
 
 ```php
@@ -60,18 +61,25 @@ looks like this:
 
 namespace Porpaginas;
 
-interface Paginator extends Countable, IteratorAggregate
+interface Page extends Countable, IteratorAggregate
 {
     /**
-     * Return the number of ALL results in the paginatable.
+     * Return the number of results on the current page.
 
      * @return int
      */
     public function count();
 
     /**
+     * Return the number of ALL results in the paginatable.
+
+     * @return int
+     */
+    public function totalCount();
+
+    /**
      * Return an iterator over selected windows of results of the paginatable.
-     * 
+     *
      * @return Iterator
      */
     public function getIterator();
