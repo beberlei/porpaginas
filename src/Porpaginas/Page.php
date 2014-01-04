@@ -26,6 +26,11 @@ interface Page
     /**
      * @return int
      */
+    public function getCurrentPage();
+
+    /**
+     * @return int
+     */
     public function getCurrentLimit();
 
     /**

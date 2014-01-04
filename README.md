@@ -7,6 +7,7 @@ classes alot:
   methods.
 - You need to expose the underlying data-source and return query objects from
   your repository.
+- Serialization of paginators should be easily possible for REST APIs
 
 Both Pagerfanta and KnpLabs Pager don't solve this issue and their APIs are
 really problematic in this regard. You need to return the query objects or
