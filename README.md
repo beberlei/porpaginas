@@ -108,6 +108,14 @@ class UserController
      */
     private $userRepository;
 
+    public function listAction(Request $request)
+    {
+        $result = $this->userRepository->findAllUsers();
+        // no filtering by page, iterate full result
+
+        return array('users' => $result);
+    }
+
     public function pagerfantaListAction(Request $request)
     {
         $result = $this->userRepository->findAllUsers();
