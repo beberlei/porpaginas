@@ -58,4 +58,9 @@ class PorpaginasExtension extends Twig_Extension
     {
         return $page->totalCount();
     }
+
+    public function getName()
+    {
+        return 'Porpaginas';
+    }
 }

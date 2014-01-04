@@ -44,7 +44,7 @@ class PagerfantaRenderingAdapter implements RenderingAdapter
         $pagerfanta->setMaxPerPage($page->getCurrentLimit());
 
         return $environment->getExtension('pagerfanta')->renderPagerfanta(
-            $pagerfanta
+            $pagerfanta, $this->viewName, $this->options
         );
     }
 }
