@@ -12,7 +12,8 @@
     },
     "require-dev": {
         "doctrine/orm": ">=2.2",
-        "pagerfanta/pagerfanta": "@stable"
+        "pagerfanta/pagerfanta": "@stable",
+        "twig/twig": "@stable"
     },
     "suggest": {
         "pagerfanta/pagerfanta": "For rendering pagination with Pagerfanta"
