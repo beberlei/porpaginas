@@ -55,5 +55,31 @@ abstract class AbstractResultTestCase extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $page);
     }
 
+    /**
+     * @test
+     */
+    public function it_counts_page_first_then_iterates()
+    {
+        $result = $this->createResultWithItems(16);
+
+        $page = $result->take(10, 5);
+
+        $this->assertCount(5, $page);
+        $this->assertCount(5, iterator_to_array($page));
+    }
+
+    /**
+     * @test
+     */
+    public function it_itereates_first_then_counts_page()
+    {
+        $result = $this->createResultWithItems(16);
+
+        $page = $result->take(10, 5);
+
+        $this->assertCount(5, iterator_to_array($page));
+        $this->assertCount(5, $page);
+    }
+
     abstract protected function createResultWithItems($count);
 }

@@ -14,6 +14,7 @@
 namespace Porpaginas\Arrays;
 
 use Porpaginas\Page;
+use ArrayIterator;
 
 class ArrayPage implements Page
 {
