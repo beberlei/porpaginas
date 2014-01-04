@@ -159,3 +159,7 @@ class UserController
     }
 }
 ```
+
+## Pager Library Support
+
+* For Pagerfanta use the ``Porpaginas\Pagerfanta\PorpaginasAdapter`` and pass it a result as first argument.

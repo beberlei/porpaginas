@@ -1,6 +1,8 @@
 {
     "name": "beberlei/porpaginas",
     "description": "Library that generically solves several pagination issues with DAO/repository abstractions.",
+    "keywords": ["page","paging", "paginator", "pagination"],
+    "type": "library",
     "license": "MIT",
     "authors": [
         {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de"}
@@ -9,6 +11,10 @@
         "psr-0": {"Porpaginas\\": "src/"}
     },
     "require-dev": {
-        "doctrine/orm": ">=2.2"
+        "doctrine/orm": ">=2.2",
+        "pagerfanta/pagerfanta": "@stable"
+    },
+    "suggest": {
+        "pagerfanta/pagerfanta": "For rendering pagination with Pagerfanta"
     }
 }
