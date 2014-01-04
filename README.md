@@ -17,13 +17,13 @@ Porpaginas solves this by introducing a sane abstraction for paginated results.
 For rendering purposes you can integrate with either Pagerfanta or KnpLabs
 Pager, this library is not about reimplementating the view part of pagination.
 
-Central part of this library is the interface `Paginatable`:
+Central part of this library is the interface `ResultSet`:
 
 ```php
 <?php
 namespace Porpaginas;
 
-interface Paginatable extends Countable, IteratorAggregate
+interface ResultSet extends Countable, IteratorAggregate
 {
     /**
      * @param int $offset
@@ -50,9 +50,9 @@ interface Paginatable extends Countable, IteratorAggregate
 This API offers you two ways to iterate over the paginatable result,
 either the full result or a paginated window of the result using ``take()``.
 One drawback is that the query is always lazily executed inside
-the ``Paginatable`` and not directly in the repository.
+the ``ResultSet`` and not directly in the repository.
 
-The ``Paginator`` interface returned from ``Paginatable#take()``
+The ``Paginator`` interface returned from ``ResultSet#take()``
 looks like this:
 
 ```php
@@ -91,13 +91,13 @@ Take the following example using Doctrine ORM:
 class UserRepository extends EntityRepository
 {
     /**
-     * @return \Porpaginas\Paginatable
+     * @return \Porpaginas\ResultSet
      */
     public function findAllUsers()
     {
         $qb = $this->createQueryBuilder('u')->orderBy('u.username');
 
-        return new ORMQueryPagintable($qb);
+        return new ORMQueryResultSet($qb);
     }
 }
 
