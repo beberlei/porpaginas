@@ -116,6 +116,15 @@ class UserController
         return array('users' => $result);
     }
 
+    public function porpaginasListAction(Request $request)
+    {
+        $result = $this->userRepository->findAllUsers();
+
+        $paginator = $result->take( ($request->get('page')-1) * 20, 20 );
+
+        return array('users' => $paginator);
+    }
+
     public function pagerfantaListAction(Request $request)
     {
         $result = $this->userRepository->findAllUsers();
