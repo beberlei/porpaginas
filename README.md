@@ -134,30 +134,22 @@ class UserController
 
         return array('users' => $paginator);
     }
-
-    public function pagerfantaListAction(Request $request)
-    {
-        $result = $this->userRepository->findAllUsers();
-
-        $paginator = new Pagerfanta(new PorpaginasAdapter($result));
-        $paginator->setCurrentPage($request->get('page'));
-
-        return array('users' => $paginator);
-    }
-
-    public function knplabsListAction(Request $request)
-    {
-        $result = $this->userRepository->findAllUsers();
-
-        $paginator = $this->get('knp_paginator')->paginate(
-            $result,
-            $request->get('page'),
-            20
-        );
-
-        return array('users' => $paginator);
-    }
 }
+```
+
+Now in the template for `porpaginasListAction` using the `porpaginas` Twig
+extension for example:
+
+```jinja
+We found a total of <strong>{{ porpaginas_total(users) }}</strong> users:
+
+<ul>
+{% for user in users %}
+    <li>{{ user.name }}</li>
+{% endfor %}
+</ul>
+
+{{ porpaginas_render(users) }}
 ```
 
 ## Pager Library Support
