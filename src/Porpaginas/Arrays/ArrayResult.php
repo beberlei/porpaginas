@@ -11,36 +11,51 @@
  * to kontakt@beberlei.de so I can send you a copy immediately.
  */
 
-namespace Porpaginas;
+namespace Porpaginas\Arrays;
 
-use Countable;
-use IteratorAggregate;
+use Porpaginas\Result;
+use ArrayIterator;
 
-/**
- * Central abstraction for paginatable results.
- *
- * It allows iterating over the result either paginated using the {@link take}
- * method or non-paginated using the iterator aggregate API.
- */
-interface Result extends Countable, IteratorAggregate
+class ArrayResult implements Result
 {
+    private $data;
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
+
     /**
      * @param int $offset
      * @return \Porpaginas\Page
      */
-    public function take($offset, $limit);
+    public function take($offset, $limit)
+    {
+        return new ArrayPage(
+            array_slice($this->data, $offset, $limit),
+            $offset,
+            $limit,
+            count($this->data)
+        );
+    }
 
     /**
      * Return the number of all results in the paginatable.
 
      * @return int
      */
-    public function count();
+    public function count()
+    {
+        return count($this->data);
+    }
 
     /**
      * Return an iterator over all results of the paginatable.
      *
      * @return Iterator
      */
-    public function getIterator();
+    public function getIterator()
+    {
+        return new ArrayIterator($this->data);
+    }
 }

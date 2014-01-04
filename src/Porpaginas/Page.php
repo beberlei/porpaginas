@@ -13,10 +13,13 @@
 
 namespace Porpaginas;
 
+use IteratorAggregate;
+use Countable;
+
 /**
  * Interface for lazy paginators
  */
-interface Page
+interface Page extends Countable, IteratorAggregate
 {
     /**
      * @return int

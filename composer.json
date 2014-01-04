@@ -6,6 +6,6 @@
         {"name": "Benjamin Eberlei", "email": "kontakt@beberlei.de"}
     ],
     "autoload": {
-        "psr-0": {"Porpaginos\\": "src/"}
+        "psr-0": {"Porpaginas\\": "src/"}
     }
 }

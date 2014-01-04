@@ -89,6 +89,7 @@ interface Page extends Countable, IteratorAggregate
 
 ## Supported Backends
 
+- Array
 - Doctrine ORM
 
 ## Example
