@@ -44,7 +44,7 @@ class PorpaginasExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_SimpleFunction('porpaginas_render', array($this, 'renderPagination')),
+            new Twig_SimpleFunction('porpaginas_render', array($this, 'renderPagination'), array('is_safe' => array('html'))),
             new Twig_SimpleFunction('porpaginas_total', array($this, 'renderTotal')),
         );
     }
