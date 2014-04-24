@@ -64,6 +64,11 @@ class ORMQueryResult implements Result
         }
 
         $query = clone $this->query;
+        $query->setParameters($this->query->getParameters());
+        foreach ($this->query->getHints() as $name => $value) {
+            $query->setHint($name, $value);
+        }
+        
         $query->setFirstResult($offset)->setMaxResults($limit);
 
         return new ORMQueryPage(new Paginator($query, $this->fetchCollection));
