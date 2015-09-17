@@ -1,5 +1,7 @@
 # Porpaginas
 
+[![Build Status](https://travis-ci.org/beberlei/porpaginas.svg)](https://travis-ci.org/beberlei/porpaginas)
+
 This library solves a bunch of issues that comes up with APIs of Repository
 classes alot:
 
