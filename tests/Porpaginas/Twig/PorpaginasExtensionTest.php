@@ -14,9 +14,8 @@ class PorpaginasExtensionTest extends \PHPUnit_Framework_TestCase
         $adapter = \Phake::mock('Porpaginas\Twig\RenderingAdapter');
 
         $extension = new PorpaginasExtension($adapter);
-        $extension->initRuntime($env);
 
-        $extension->renderPagination($page);
+        $extension->renderPagination($env, $page);
 
         \Phake::verify($adapter)->renderPagination($page, $env);
     }
