@@ -13,7 +13,9 @@
 
 namespace Porpaginas\Twig;
 
+use Pagerfanta\Pagerfanta;
 use Porpaginas\Page;
+use Porpaginas\Pagerfanta\PorpaginasAdapter;
 use Twig_Environment;
 
 class PagerfantaRenderingAdapter implements RenderingAdapter
