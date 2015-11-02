@@ -157,3 +157,25 @@ We found a total of <strong>{{ porpaginas_total(users) }}</strong> users:
 ## Pager Library Support
 
 * For Pagerfanta use the ``Porpaginas\Pagerfanta\PorpaginasAdapter`` and pass it a result as first argument.
+
+## Embedded Pager
+
+You can use the `Porpaginas\Pager` class to help you get a slice of previous and next pages to display:
+
+``` php
+$pager = Porpaginas\Pager::fromPage($page);
+```
+
+Passed to a twig template:
+
+``` jinja
+<nav class="pages">
+    <ul>
+        {% for page in pager.pages() %}
+            <li class="{{ pager.isCurrent(page) ? 'active' }}">
+                <a href="{{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+```
