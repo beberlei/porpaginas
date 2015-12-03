@@ -39,6 +39,11 @@ class ORMQueryResult implements Result
      */
     private $result;
 
+    /**
+     * @var int
+     */
+    private $count;
+
     public function __construct($query, $fetchCollection = true)
     {
         if ($query instanceof QueryBuilder) {
@@ -64,15 +69,8 @@ class ORMQueryResult implements Result
             );
         }
 
-        $query = clone $this->query;
-        $query->setParameters($this->query->getParameters());
-        foreach ($this->query->getHints() as $name => $value) {
-            $query->setHint($name, $value);
-        }
 
-        $query->setFirstResult($offset)->setMaxResults($limit);
-
-        return new ORMQueryPage(new Paginator($query, $this->fetchCollection));
+        return new ORMQueryPage($this->getPaginator($offset, $limit));
     }
 
     /**
@@ -82,9 +80,11 @@ class ORMQueryResult implements Result
      */
     public function count()
     {
-        $this->loadQuery();
+        if (null !== $this->count) {
+            return $this->count;
+        }
 
-        return count($this->result);
+        return $this->count = count($this->getPaginator(0, 1));
     }
 
     /**
@@ -94,15 +94,31 @@ class ORMQueryResult implements Result
      */
     public function getIterator()
     {
-        $this->loadQuery();
+        if (null === $this->result) {
+            $this->result = $this->query->getResult();
+            $this->count = count($this->result);
+        }
 
         return new ArrayIterator($this->result);
     }
 
-    private function loadQuery()
+    /**
+     * @param int $offset
+     * @param int $limit
+     *
+     * @return Paginator
+     */
+    private function getPaginator($offset, $limit)
     {
-        if ($this->result === null) {
-            $this->result = $this->query->getResult();
+        $query = clone $this->query;
+        $query->setParameters($this->query->getParameters());
+
+        foreach ($this->query->getHints() as $name => $value) {
+            $query->setHint($name, $value);
         }
+
+        $query->setFirstResult($offset)->setMaxResults($limit);
+
+        return new Paginator($query, $this->fetchCollection);
     }
 }
