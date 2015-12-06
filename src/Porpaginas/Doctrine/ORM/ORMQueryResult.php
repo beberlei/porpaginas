@@ -13,6 +13,7 @@
 
 namespace Porpaginas\Doctrine\ORM;
 
+use Porpaginas\Arrays\ArrayPage;
 use Porpaginas\Result;
 
 use Doctrine\ORM\Query;
@@ -68,7 +69,7 @@ class ORMQueryResult implements Result
         foreach ($this->query->getHints() as $name => $value) {
             $query->setHint($name, $value);
         }
-        
+
         $query->setFirstResult($offset)->setMaxResults($limit);
 
         return new ORMQueryPage(new Paginator($query, $this->fetchCollection));
