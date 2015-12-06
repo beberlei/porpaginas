@@ -10,6 +10,9 @@
     "autoload": {
         "psr-0": {"Porpaginas\\": "src/"}
     },
+    "autoload-dev": {
+        "psr-0": {"Porpaginas\\": "tests/"}
+    },
     "require-dev": {
         "doctrine/orm": ">=2.2",
         "pagerfanta/pagerfanta": "@stable",
