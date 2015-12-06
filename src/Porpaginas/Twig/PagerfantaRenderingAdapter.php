@@ -13,9 +13,9 @@
 
 namespace Porpaginas\Twig;
 
+use Pagerfanta\Adapter\CallbackAdapter;
 use Pagerfanta\Pagerfanta;
 use Porpaginas\Page;
-use Porpaginas\Pagerfanta\PorpaginasAdapter;
 use Twig_Environment;
 
 class PagerfantaRenderingAdapter implements RenderingAdapter
@@ -41,7 +41,14 @@ class PagerfantaRenderingAdapter implements RenderingAdapter
      */
     public function renderPagination(Page $page, Twig_Environment $environment)
     {
-        $pagerfanta = new Pagerfanta(new PorpaginasAdapter($page));
+        $pagerfanta = new Pagerfanta(new CallbackAdapter(
+            function () use ($page) {
+                return $page->totalCount();
+            },
+            function () use ($page) {
+                return iterator_to_array($page->getIterator());
+            }
+        ));
         $pagerfanta->setCurrentPage($page->getCurrentPage());
         $pagerfanta->setMaxPerPage($page->getCurrentLimit());
 
