@@ -2,27 +2,37 @@
 
 namespace Porpaginas;
 
-final class Pager
+final class Pager implements \IteratorAggregate
 {
     private $totalCount;
     private $limit;
-    private $currentPage;
+    private $currentPageNumber;
+    private $page;
 
-    public function __construct($totalCount, $limit, $currentPage)
+    public function __construct(Page $page)
     {
-        $this->totalCount = $totalCount;
-        $this->limit = $limit;
-        $this->currentPage = max(1, $currentPage);
+        $this->totalCount = $page->totalCount();
+        $this->limit = $page->getCurrentLimit();
+        $this->currentPageNumber = max(1, $page->getCurrentPage());
+        $this->page = $page;
     }
 
-    public static function fromPage(Page $page)
+    public static function fromResult(Result $result, $page, $numberPerPage)
     {
-        return new self($page->totalCount(), $page->getCurrentLimit(), $page->getCurrentPage());
+        $limit = max(0, $numberPerPage);
+        $offset = max(0, ($page - 1) * $limit);
+
+        return new self($result->take($offset, $limit));
+    }
+
+    public function getIterator()
+    {
+        return $this->page;
     }
 
     public function isCurrent($page)
     {
-        return $this->currentPage === $page;
+        return $this->currentPageNumber === $page;
     }
 
     public function getPages($siblings = 3)
@@ -32,19 +42,19 @@ final class Pager
 
     public function getNumberOfPages()
     {
-        return ceil($this->totalCount / $this->limit) ?: 1;
+        return (int)ceil($this->totalCount / $this->limit) ?: 1;
     }
 
     private function getSliceStart($siblings)
     {
         return min(
             max(1, $this->getNumberOfPages() - $siblings),
-            max(1, $this->currentPage - $siblings)
+            max(1, $this->currentPageNumber - $siblings)
         );
     }
 
     private function getSliceEnd($siblings)
     {
-        return max(1, min($this->getNumberOfPages(), $this->currentPage + $siblings));
+        return max(1, min($this->getNumberOfPages(), $this->currentPageNumber + $siblings));
     }
 }

@@ -163,17 +163,22 @@ We found a total of <strong>{{ porpaginas_total(users) }}</strong> users:
 You can use the `Porpaginas\Pager` class to help you get a slice of previous and next pages to display:
 
 ``` php
-$pager = Porpaginas\Pager::fromPage($page);
+$pager = Porpaginas\Pager::fromResult($result, $request->query->get('page', 1), 20);
 ```
 
 Passed to a twig template:
 
 ``` jinja
+
+{% for item in pager %}
+  {{ item.name }}
+{% endfor %}
+
 <nav class="pages">
     <ul>
         {% for page in pager.pages() %}
             <li class="{{ pager.isCurrent(page) ? 'active' }}">
-                <a href="{{ page }}">{{ page }}</a>
+                <a href="?page={{ page }}">{{ page }}</a>
             </li>
         {% endfor %}
     </ul>
