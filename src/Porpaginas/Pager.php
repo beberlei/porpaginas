@@ -13,7 +13,7 @@ final class Pager implements \IteratorAggregate
     {
         $this->totalCount = $page->totalCount();
         $this->limit = $page->getCurrentLimit();
-        $this->currentPageNumber = max(1, $page->getCurrentPage());
+        $this->currentPageNumber = intval(max(1, $page->getCurrentPage()));
         $this->page = $page;
     }
 
