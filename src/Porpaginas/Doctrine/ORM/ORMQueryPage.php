@@ -47,7 +47,7 @@ class ORMQueryPage implements Page
      */
     public function getCurrentPage()
     {
-        return floor($this->getCurrentOffset() / $this->getCurrentLimit()) + 1;
+        return (int) floor($this->getCurrentOffset() / $this->getCurrentLimit()) + 1;
     }
 
     /**

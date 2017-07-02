@@ -32,7 +32,7 @@ final class Pager
 
     public function getNumberOfPages()
     {
-        return ceil($this->totalCount / $this->limit) ?: 1;
+        return (int) ceil($this->totalCount / $this->limit) ?: 1;
     }
 
     private function getSliceStart($siblings)

@@ -44,7 +44,7 @@ class ArrayPage implements Page
      */
     public function getCurrentPage()
     {
-        return floor($this->offset / $this->limit) + 1;
+        return (int) floor($this->offset / $this->limit) + 1;
     }
 
     /**
