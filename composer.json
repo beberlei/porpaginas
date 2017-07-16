@@ -23,5 +23,8 @@
     },
     "suggest": {
         "pagerfanta/pagerfanta": "For rendering pagination with Pagerfanta"
+    },
+    "require": {
+        "phpunit/phpunit": "^5.7"
     }
 }
