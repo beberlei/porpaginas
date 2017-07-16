@@ -89,6 +89,9 @@ interface Page extends Countable, IteratorAggregate
 }
 ```
 
+You can use the `IteratorPage` in your own implementations, if the underlying
+data-source is itself an iterator.
+
 ## Supported Backends
 
 - Array
@@ -132,7 +135,7 @@ class UserController
     {
         $result = $this->userRepository->findAllUsers();
 
-        $paginator = $result->take( ($request->get('page')-1) * 20, 20 );
+        $paginator = $result->take(($request->get('page')-1) * 20, 20);
 
         return array('users' => $paginator);
     }
