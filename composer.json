@@ -19,12 +19,10 @@
         "knplabs/knp-components": "@stable",
         "symfony/event-dispatcher": "@stable",
         "twig/twig": "@stable",
-        "phake/phake": "@stable"
+        "phake/phake": "@stable",
+        "phpunit/phpunit": "^5.7"
     },
     "suggest": {
         "pagerfanta/pagerfanta": "For rendering pagination with Pagerfanta"
-    },
-    "require": {
-        "phpunit/phpunit": "^5.7"
     }
 }
