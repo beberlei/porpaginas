@@ -53,7 +53,7 @@ interface Page extends Countable, IteratorAggregate
     /**
      * Return an iterator over selected windows of results of the paginatable.
      *
-     * @return Iterator
+     * @return \Iterator
      */
     public function getIterator();
 }
