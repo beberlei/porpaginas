@@ -26,6 +26,7 @@ interface Result extends Countable, IteratorAggregate
 {
     /**
      * @param int $offset
+     * @param int $limit
      * @return \Porpaginas\Page
      */
     public function take($offset, $limit);
@@ -40,7 +41,7 @@ interface Result extends Countable, IteratorAggregate
     /**
      * Return an iterator over all results of the paginatable.
      *
-     * @return Iterator
+     * @return \Iterator
      */
     public function getIterator();
 }
