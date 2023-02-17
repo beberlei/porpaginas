@@ -36,6 +36,7 @@ interface Result extends Countable, IteratorAggregate
 
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count();
 
     /**
@@ -43,5 +44,6 @@ interface Result extends Countable, IteratorAggregate
      *
      * @return \Iterator
      */
+    #[\ReturnTypeWillChange]
     public function getIterator();
 }
