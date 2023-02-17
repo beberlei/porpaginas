@@ -13,6 +13,9 @@
     "autoload-dev": {
         "psr-0": {"Porpaginas\\": "tests/"}
     },
+    "require": {
+        "php": "^8"
+    },
     "require-dev": {
         "doctrine/orm": ">=2.2",
         "pagerfanta/pagerfanta": "@stable",
@@ -20,7 +23,8 @@
         "symfony/event-dispatcher": "@stable",
         "twig/twig": "@stable",
         "phake/phake": "@stable",
-        "phpunit/phpunit": "^5.7"
+        "phpunit/phpunit": "^7|^8|^9",
+        "symfony/cache": "@stable"
     },
     "suggest": {
         "pagerfanta/pagerfanta": "For rendering pagination with Pagerfanta"

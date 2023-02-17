@@ -4,8 +4,9 @@ namespace Porpaginas\KnpPager;
 
 use Knp\Component\Pager\Event\ItemsEvent;
 use Porpaginas\Arrays\ArrayPage;
+use PHPUnit\Framework\TestCase;
 
-class PorpaginasSubscriberTest extends \PHPUnit_Framework_TestCase
+class PorpaginasSubscriberTest extends TestCase
 {
     /**
      * @test

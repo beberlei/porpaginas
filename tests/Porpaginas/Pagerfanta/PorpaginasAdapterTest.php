@@ -4,8 +4,9 @@ namespace Porpaginas\Pagerfanta;
 
 use Porpaginas\Arrays\ArrayResult;
 use Pagerfanta\Pagerfanta;
+use PHPUnit\Framework\TestCase;
 
-class PorpaginasAdapterTest extends \PHPUnit_Framework_TestCase
+class PorpaginasAdapterTest extends TestCase
 {
     /**
      * @test

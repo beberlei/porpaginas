@@ -2,6 +2,10 @@
 
 namespace Porpaginas;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
 use Porpaginas\Doctrine\ORM\ORMQueryResult;
 
 use Doctrine\ORM\Tools\Setup;
@@ -36,7 +40,7 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
             'memory' => true,
         );
 
-        $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+        $config = Setup::createAttributeMetadataConfiguration($paths, $isDevMode);
         $entityManager = EntityManager::create($dbParams, $config);
 
         $schemaTool = new SchemaTool($entityManager);
@@ -48,13 +52,9 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
     }
 }
 
-/**
- * @Entity
- */
+#[Entity]
 class DoctrineOrmEntity
 {
-    /**
-     * @Id @Column(type="integer") @GeneratedValue
-     */
+    #[Id, Column(type: "integer"), GeneratedValue]
     private $id;
 }

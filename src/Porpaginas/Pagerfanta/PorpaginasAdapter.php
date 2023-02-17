@@ -19,7 +19,7 @@ class PorpaginasAdapter implements AdapterInterface
      *
      * @return integer The number of results.
      */
-    function getNbResults()
+    function getNbResults(): int
     {
         return $this->result->take(0, 1)->totalCount();
     }
@@ -32,7 +32,7 @@ class PorpaginasAdapter implements AdapterInterface
      *
      * @return array|\Traversable The slice.
      */
-    function getSlice($offset, $length)
+    function getSlice(int $offset, int $length): iterable
     {
         return iterator_to_array($this->result->take($offset, $length));
     }
