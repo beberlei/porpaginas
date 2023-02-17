@@ -22,9 +22,6 @@
         "phake/phake": "@stable",
         "phpunit/phpunit": "^5.7"
     },
-    "require": {
-        "php": ">=8.1"
-    },
     "suggest": {
         "pagerfanta/pagerfanta": "For rendering pagination with Pagerfanta"
     }
