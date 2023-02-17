@@ -39,6 +39,11 @@ class ORMQueryResult implements Result
      */
     private $result;
 
+    /**
+     * @var int|null
+     */
+    private $count;
+
     public function __construct($query, $fetchCollection = true)
     {
         if ($query instanceof QueryBuilder) {
@@ -82,9 +87,11 @@ class ORMQueryResult implements Result
      */
     public function count()
     {
-        $this->loadQuery();
+        if ($this->count === null) {
+            $this->count = count(new Paginator($this->query, $this->fetchCollection));
+        }
 
-        return count($this->result);
+        return $this->count;
     }
 
     /**
@@ -94,15 +101,11 @@ class ORMQueryResult implements Result
      */
     public function getIterator()
     {
-        $this->loadQuery();
-
-        return new ArrayIterator($this->result);
-    }
-
-    private function loadQuery()
-    {
         if ($this->result === null) {
             $this->result = $this->query->getResult();
+            $this->count = count($this->result);
         }
+
+        return new ArrayIterator($this->result);
     }
 }
