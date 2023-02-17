@@ -13,6 +13,9 @@
     "autoload-dev": {
         "psr-0": {"Porpaginas\\": "tests/"}
     },
+    "require": {
+        "php": "^8"
+    },
     "require-dev": {
         "doctrine/orm": ">=2.2",
         "pagerfanta/pagerfanta": "@stable",
