@@ -3,8 +3,9 @@
 namespace Porpaginas;
 
 use Porpaginas\Pager;
+use PHPUnit\Framework\TestCase;
 
-final class PagerTest extends \PHPUnit_Framework_TestCase
+final class PagerTest extends TestCase
 {
     /**
      * @test

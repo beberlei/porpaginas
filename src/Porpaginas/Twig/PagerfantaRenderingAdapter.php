@@ -16,7 +16,7 @@ namespace Porpaginas\Twig;
 use Pagerfanta\Pagerfanta;
 use Porpaginas\Page;
 use Porpaginas\Pagerfanta\PorpaginasAdapter;
-use Twig_Environment;
+use Twig\Environment;
 
 class PagerfantaRenderingAdapter implements RenderingAdapter
 {
@@ -39,7 +39,7 @@ class PagerfantaRenderingAdapter implements RenderingAdapter
     /**
      * @return string
      */
-    public function renderPagination(Page $page, Twig_Environment $environment)
+    public function renderPagination(Page $page, Environment $environment)
     {
         $pagerfanta = new Pagerfanta(new PorpaginasAdapter($page));
         $pagerfanta->setCurrentPage($page->getCurrentPage());

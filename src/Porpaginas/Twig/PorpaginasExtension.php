@@ -15,11 +15,11 @@ namespace Porpaginas\Twig;
 
 use Porpaginas\Page;
 
-use Twig_Extension;
-use Twig_SimpleFunction;
-use Twig_Environment;
+use Twig\Extension;
+use Twig\Environment;
+use Twig\TwigFunction;
 
-class PorpaginasExtension extends Twig_Extension
+class PorpaginasExtension extends Extension\AbstractExtension
 {
     /**
      * @var \Porpaginas\Twig\RenderingAdapter
@@ -34,12 +34,12 @@ class PorpaginasExtension extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_SimpleFunction('porpaginas_render', array($this, 'renderPagination'), array('is_safe' => array('html'), 'needs_environment' => true)),
-            new Twig_SimpleFunction('porpaginas_total', array($this, 'renderTotal')),
+            new TwigFunction('porpaginas_render', array($this, 'renderPagination'), array('is_safe' => array('html'), 'needs_environment' => true)),
+            new TwigFunction('porpaginas_total', array($this, 'renderTotal')),
         );
     }
 
-    public function renderPagination(Twig_Environment $environment, Page $page)
+    public function renderPagination(Environment $environment, Page $page)
     {
         return $this->adapter->renderPagination($page, $environment);
     }
