@@ -8,9 +8,10 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Porpaginas\Doctrine\ORM\ORMQueryResult;
 
-use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\DriverManager;
 
 class DoctrineORMQueryTest extends AbstractResultTestCase
 {
@@ -40,8 +41,9 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
             'memory' => true,
         );
 
-        $config = Setup::createAttributeMetadataConfiguration($paths, $isDevMode);
-        $entityManager = EntityManager::create($dbParams, $config);
+        $config = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
+        $connection = DriverManager::getConnection($dbParams, $config);
+        $entityManager = new EntityManager($connection, $config);
 
         $schemaTool = new SchemaTool($entityManager);
         $schemaTool->createSchema(array(

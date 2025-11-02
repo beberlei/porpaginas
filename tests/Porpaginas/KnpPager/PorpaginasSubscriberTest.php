@@ -5,6 +5,7 @@ namespace Porpaginas\KnpPager;
 use Knp\Component\Pager\Event\ItemsEvent;
 use Porpaginas\Arrays\ArrayPage;
 use PHPUnit\Framework\TestCase;
+use Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface;
 
 class PorpaginasSubscriberTest extends TestCase
 {
@@ -13,7 +14,8 @@ class PorpaginasSubscriberTest extends TestCase
      */
     public function it_handles_and_converts_page()
     {
-        $event = new ItemsEvent(10, 10);
+        $argumentAccess = \Phake::mock(ArgumentAccessInterface::class);
+        $event = new ItemsEvent(10, 10, $argumentAccess);
         $event->target = new ArrayPage(array(1, 2), 10, 10, 2);
 
         $subscriber = new PorpaginasSubscriber();
