@@ -44,6 +44,7 @@ class ArrayResult implements Result
 
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->data);
@@ -54,6 +55,7 @@ class ArrayResult implements Result
      *
      * @return Iterator
      */
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->data);
