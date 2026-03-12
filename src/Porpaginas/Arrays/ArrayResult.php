@@ -16,10 +16,20 @@ namespace Porpaginas\Arrays;
 use Porpaginas\Result;
 use ArrayIterator;
 
+/**
+ * @template T
+ * @implements Result<T>
+ */
 class ArrayResult implements Result
 {
+    /**
+     * @var array<array-key, T>
+     */
     private $data;
 
+    /**
+     * @param array<array-key, T> $data
+     */
     public function __construct(array $data)
     {
         $this->data = $data;
@@ -27,7 +37,8 @@ class ArrayResult implements Result
 
     /**
      * @param int $offset
-     * @return \Porpaginas\Page
+     * @param int $limit
+     * @return \Porpaginas\Page<T>
      */
     public function take($offset, $limit)
     {
@@ -53,7 +64,7 @@ class ArrayResult implements Result
     /**
      * Return an iterator over all results of the paginatable.
      *
-     * @return Iterator
+     * @return ArrayIterator<array-key, T>
      */
     #[\ReturnTypeWillChange]
     public function getIterator()

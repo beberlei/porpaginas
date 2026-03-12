@@ -22,7 +22,7 @@ use Twig\TwigFunction;
 class PorpaginasExtension extends Extension\AbstractExtension
 {
     /**
-     * @var \Porpaginas\Twig\RenderingAdapter
+     * @var RenderingAdapter
      */
     private $adapter;
 
@@ -31,6 +31,9 @@ class PorpaginasExtension extends Extension\AbstractExtension
         $this->adapter = $adapter;
     }
 
+    /**
+     * @return array<int, TwigFunction>
+     */
     public function getFunctions()
     {
         return array(
@@ -39,16 +42,27 @@ class PorpaginasExtension extends Extension\AbstractExtension
         );
     }
 
+    /**
+     * @param Page<mixed> $page
+     * @return string
+     */
     public function renderPagination(Environment $environment, Page $page)
     {
         return $this->adapter->renderPagination($page, $environment);
     }
 
+    /**
+     * @param Page<mixed> $page
+     * @return int
+     */
     public function renderTotal(Page $page)
     {
         return $page->totalCount();
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'Porpaginas';

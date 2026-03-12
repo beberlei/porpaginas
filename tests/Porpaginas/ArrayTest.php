@@ -6,7 +6,10 @@ use Porpaginas\Arrays\ArrayResult;
 
 class ArrayTest extends AbstractResultTestCase
 {
-    protected function createResultWithItems($count)
+    /**
+     * @return Result<string>
+     */
+    protected function createResultWithItems(int $count): Result
     {
         return new ArrayResult(array_fill(0, $count, 'value'));
     }

@@ -21,15 +21,19 @@ use Twig\Environment;
 class PagerfantaRenderingAdapter implements RenderingAdapter
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $viewName;
 
     /**
-     * @var array
+     * @var array<array-key, mixed>
      */
     private $options;
 
+    /**
+     * @param string|null $viewName
+     * @param array<array-key, mixed> $options
+     */
     public function __construct($viewName = null, $options = array())
     {
         $this->viewName = $viewName;
@@ -37,6 +41,7 @@ class PagerfantaRenderingAdapter implements RenderingAdapter
     }
 
     /**
+     * @param Page<mixed> $page
      * @return string
      */
     public function renderPagination(Page $page, Environment $environment)
@@ -45,7 +50,10 @@ class PagerfantaRenderingAdapter implements RenderingAdapter
         $pagerfanta->setCurrentPage($page->getCurrentPage());
         $pagerfanta->setMaxPerPage($page->getCurrentLimit());
 
-        return $environment->getExtension('pagerfanta')->renderPagerfanta(
+        $method = new \ReflectionMethod($environment, 'getExtension');
+        $extension = $method->invoke($environment, 'pagerfanta');
+
+        return $extension->renderPagerfanta(
             $pagerfanta, $this->viewName, $this->options
         );
     }

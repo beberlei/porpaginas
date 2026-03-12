@@ -15,7 +15,10 @@ use Doctrine\DBAL\DriverManager;
 
 class DoctrineORMQueryTest extends AbstractResultTestCase
 {
-    protected function createResultWithItems($count)
+    /**
+     * @return Result<DoctrineOrmEntity>
+     */
+    protected function createResultWithItems(int $count): Result
     {
         $entityManager = $this->setupEntityManager();
 
@@ -30,7 +33,7 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
         return new ORMQueryResult($query);
     }
 
-    private function setupEntityManager()
+    private function setupEntityManager(): EntityManager
     {
         $paths = array();
         $isDevMode = false;
@@ -41,7 +44,23 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
             'memory' => true,
         );
 
-        $config = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
+        $createConfigMethod = 'createAttributeMetadataConfig';
+        // @phpstan-ignore-next-line compatibility with Doctrine ORM versions that do not have this method
+        if (method_exists(ORMSetup::class, $createConfigMethod)) {
+            $config = ORMSetup::{$createConfigMethod}($paths, $isDevMode);
+        } else {
+            $config = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
+        }
+
+        $enableNativeLazyObjectsMethod = 'enableNativeLazyObjects';
+        // @phpstan-ignore-next-line compatibility with Doctrine ORM versions that do not have this method
+        if (\PHP_VERSION_ID >= 80400 && method_exists($config, $enableNativeLazyObjectsMethod)) {
+            $config->{$enableNativeLazyObjectsMethod}(true);
+        } else {
+            $config->setProxyDir(sys_get_temp_dir());
+            $config->setProxyNamespace('Proxies');
+        }
+
         $connection = DriverManager::getConnection($dbParams, $config);
         $entityManager = new EntityManager($connection, $config);
 
@@ -58,5 +77,6 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
 class DoctrineOrmEntity
 {
     #[Id, Column(type: "integer"), GeneratedValue]
-    private $id;
+    // @phpstan-ignore property.unused
+    private int $id;
 }

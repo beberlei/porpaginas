@@ -9,6 +9,9 @@ use Knp\Component\Pager\Event\ItemsEvent;
 
 class PorpaginasSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @return void
+     */
     public function items(ItemsEvent $event)
     {
         if ( ! ($event->target instanceof Page)) {
@@ -22,7 +25,7 @@ class PorpaginasSubscriber implements EventSubscriberInterface
         $event->stopPropagation();
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return array(
             'knp_pager.items' => array('items', 0)

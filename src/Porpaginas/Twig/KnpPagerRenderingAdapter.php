@@ -8,9 +8,19 @@ use Knp\Component\Pager\Paginator;
 
 class KnpPagerRenderingAdapter implements RenderingAdapter
 {
+    /**
+     * @var Paginator
+     */
     private $paginator;
+
+    /**
+     * @var string|null
+     */
     private $template;
 
+    /**
+     * @param string|null $template
+     */
     public function __construct(Paginator $paginator, $template = null)
     {
         $this->paginator = $paginator;
@@ -18,11 +28,15 @@ class KnpPagerRenderingAdapter implements RenderingAdapter
     }
 
     /**
+     * @param Page<mixed> $page
      * @return string
      */
     public function renderPagination(Page $page, Environment $environment)
     {
-        return $environment->getExtension('knp_pagination')->render(
+        $method = new \ReflectionMethod($environment, 'getExtension');
+        $extension = $method->invoke($environment, 'knp_pagination');
+
+        return $extension->render(
             $this->paginator->paginate(
                 $page,
                 $page->getCurrentPage(),

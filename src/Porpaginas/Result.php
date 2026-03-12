@@ -21,13 +21,16 @@ use IteratorAggregate;
  *
  * It allows iterating over the result either paginated using the {@link take}
  * method or non-paginated using the iterator aggregate API.
+ *
+ * @template-covariant T
+ * @extends IteratorAggregate<array-key, T>
  */
 interface Result extends Countable, IteratorAggregate
 {
     /**
      * @param int $offset
      * @param int $limit
-     * @return \Porpaginas\Page
+     * @return Page<T>
      */
     public function take($offset, $limit);
 
@@ -42,7 +45,7 @@ interface Result extends Countable, IteratorAggregate
     /**
      * Return an iterator over all results of the paginatable.
      *
-     * @return \Iterator
+     * @return \Traversable<array-key, T>
      */
     #[\ReturnTypeWillChange]
     public function getIterator();

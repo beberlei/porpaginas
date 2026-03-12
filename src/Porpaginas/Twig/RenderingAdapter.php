@@ -19,6 +19,7 @@ use Twig\Environment;
 interface RenderingAdapter
 {
     /**
+     * @param Page<mixed> $page
      * @return string
      */
     public function renderPagination(Page $page, Environment $environment);

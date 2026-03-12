@@ -9,7 +9,7 @@ abstract class AbstractResultTestCase extends TestCase
     /**
      * @test
      */
-    public function it_counts_total_items()
+    public function it_counts_total_items(): void
     {
         $result = $this->createResultWithItems(2);
 
@@ -19,7 +19,7 @@ abstract class AbstractResultTestCase extends TestCase
     /**
      * @test
      */
-    public function it_iterates_over_all_items()
+    public function it_iterates_over_all_items(): void
     {
         $result = $this->createResultWithItems(11);
 
@@ -29,7 +29,7 @@ abstract class AbstractResultTestCase extends TestCase
     /**
      * @test
      */
-    public function it_takes_slice_as_page()
+    public function it_takes_slice_as_page(): void
     {
         $result = $this->createResultWithItems(11);
 
@@ -45,7 +45,7 @@ abstract class AbstractResultTestCase extends TestCase
     /**
      * @test
      */
-    public function it_counts_last_page_of_slice_correctly()
+    public function it_counts_last_page_of_slice_correctly(): void
     {
         $result = $this->createResultWithItems(11);
 
@@ -60,7 +60,7 @@ abstract class AbstractResultTestCase extends TestCase
     /**
      * @test
      */
-    public function it_counts_page_first_then_iterates()
+    public function it_counts_page_first_then_iterates(): void
     {
         $result = $this->createResultWithItems(16);
 
@@ -73,7 +73,7 @@ abstract class AbstractResultTestCase extends TestCase
     /**
      * @test
      */
-    public function it_itereates_first_then_counts_page()
+    public function it_itereates_first_then_counts_page(): void
     {
         $result = $this->createResultWithItems(16);
 
@@ -83,5 +83,8 @@ abstract class AbstractResultTestCase extends TestCase
         $this->assertCount(5, $page);
     }
 
-    abstract protected function createResultWithItems($count);
+    /**
+     * @return Result<mixed>
+     */
+    abstract protected function createResultWithItems(int $count): Result;
 }

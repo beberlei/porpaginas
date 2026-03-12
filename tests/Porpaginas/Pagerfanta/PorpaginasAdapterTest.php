@@ -11,7 +11,7 @@ class PorpaginasAdapterTest extends TestCase
     /**
      * @test
      */
-    public function it_counts_total_number_of_results()
+    public function it_counts_total_number_of_results(): void
     {
         $pagerfanta = new Pagerfanta(
             new PorpaginasAdapter(
@@ -25,7 +25,7 @@ class PorpaginasAdapterTest extends TestCase
     /**
      * @test
      */
-    public function it_iterates_slice()
+    public function it_iterates_slice(): void
     {
         $pagerfanta = new Pagerfanta(
             new PorpaginasAdapter(
