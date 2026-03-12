@@ -17,18 +17,25 @@ use Porpaginas\Page;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use ArrayIterator;
 
+/**
+ * @template T of object
+ * @implements Page<T>
+ */
 class ORMQueryPage implements Page
 {
     /**
-     * @var \Doctrine\ORM\Tools\Pagination\Paginator
+     * @var \Doctrine\ORM\Tools\Pagination\Paginator<T>
      */
     private $paginator;
 
     /**
-     * @var array
+     * @var list<T>|null
      */
     private $result;
 
+    /**
+     * @param Paginator<T> $paginator
+     */
     public function __construct(Paginator $paginator)
     {
         $this->paginator = $paginator;
@@ -66,7 +73,9 @@ class ORMQueryPage implements Page
     public function count()
     {
         if ($this->result === null) {
-            $this->result = iterator_to_array($this->paginator);
+            /** @var list<T> $result */
+            $result = iterator_to_array($this->paginator);
+            $this->result = $result;
         }
 
         return count($this->result);
@@ -85,7 +94,7 @@ class ORMQueryPage implements Page
     /**
      * Return an iterator over selected windows of results of the paginatable.
      *
-     * @return Iterator
+     * @return \Traversable<int, T>
      */
     public function getIterator()
     {
@@ -93,6 +102,9 @@ class ORMQueryPage implements Page
             return new ArrayIterator($this->result);
         }
 
-        return $this->paginator;
+        /** @var \Traversable<int, T> $paginator */
+        $paginator = $this->paginator;
+
+        return $paginator;
     }
 }

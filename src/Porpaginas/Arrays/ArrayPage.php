@@ -16,13 +16,23 @@ namespace Porpaginas\Arrays;
 use Porpaginas\Page;
 use ArrayIterator;
 
+/**
+ * @template T
+ * @implements Page<T>
+ */
 class ArrayPage implements Page
 {
+    /**
+     * @var array<int, T>
+     */
     private $slice;
     private $offset;
     private $limit;
     private $totalCount;
 
+    /**
+     * @param array<int, T> $slice
+     */
     public function __construct(array $slice, $offset, $limit, $totalCount)
     {
         $this->slice = $slice;
@@ -78,7 +88,7 @@ class ArrayPage implements Page
     /**
      * Return an iterator over selected windows of results of the paginatable.
      *
-     * @return Iterator
+     * @return \ArrayIterator<int, T>
      */
     public function getIterator()
     {

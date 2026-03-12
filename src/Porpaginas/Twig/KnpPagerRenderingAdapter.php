@@ -22,6 +22,7 @@ class KnpPagerRenderingAdapter implements RenderingAdapter
      */
     public function renderPagination(Page $page, Environment $environment)
     {
+        // @phpstan-ignore method.notFound, argument.type
         return $environment->getExtension('knp_pagination')->render(
             $this->paginator->paginate(
                 $page,

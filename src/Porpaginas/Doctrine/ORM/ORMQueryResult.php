@@ -22,6 +22,10 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use ArrayIterator;
 
+/**
+ * @template T of object
+ * @implements Result<T>
+ */
 class ORMQueryResult implements Result
 {
     /**
@@ -35,7 +39,7 @@ class ORMQueryResult implements Result
     private $fetchCollection;
 
     /**
-     * @var array
+     * @var list<T>|null
      */
     private $result;
 
@@ -56,7 +60,8 @@ class ORMQueryResult implements Result
 
     /**
      * @param int $offset
-     * @return \Porpaginas\Page
+     * @param int $limit
+     * @return \Porpaginas\Page<T>
      */
     public function take($offset, $limit)
     {
@@ -77,12 +82,15 @@ class ORMQueryResult implements Result
 
         $query->setFirstResult($offset)->setMaxResults($limit);
 
-        return new ORMQueryPage(new Paginator($query, $this->fetchCollection));
+        /** @var \Doctrine\ORM\Tools\Pagination\Paginator<T> $paginator */
+        $paginator = new Paginator($query, $this->fetchCollection);
+
+        return new ORMQueryPage($paginator);
     }
 
     /**
      * Return the number of all results in the paginatable.
-
+     *
      * @return int
      */
     public function count()
@@ -97,12 +105,14 @@ class ORMQueryResult implements Result
     /**
      * Return an iterator over all results of the paginatable.
      *
-     * @return Iterator
+     * @return \ArrayIterator<int, T>
      */
     public function getIterator()
     {
         if ($this->result === null) {
-            $this->result = $this->query->getResult();
+            /** @var list<T> $result */
+            $result = $this->query->getResult();
+            $this->result = $result;
             $this->count = count($this->result);
         }
 

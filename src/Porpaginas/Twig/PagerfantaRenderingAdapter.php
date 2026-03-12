@@ -41,10 +41,12 @@ class PagerfantaRenderingAdapter implements RenderingAdapter
      */
     public function renderPagination(Page $page, Environment $environment)
     {
+        // @phpstan-ignore argument.type
         $pagerfanta = new Pagerfanta(new PorpaginasAdapter($page));
         $pagerfanta->setCurrentPage($page->getCurrentPage());
         $pagerfanta->setMaxPerPage($page->getCurrentLimit());
 
+        // @phpstan-ignore method.notFound, argument.type
         return $environment->getExtension('pagerfanta')->renderPagerfanta(
             $pagerfanta, $this->viewName, $this->options
         );

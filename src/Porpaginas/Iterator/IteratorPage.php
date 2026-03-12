@@ -15,10 +15,14 @@ namespace Porpaginas\Iterator;
 
 use Porpaginas\Page;
 
+/**
+ * @template T
+ * @implements Page<T>
+ */
 class IteratorPage implements Page
 {
     /**
-     * @var \Iterator
+     * @var \Iterator<int, T>
      */
     private $iterator;
     
@@ -38,7 +42,7 @@ class IteratorPage implements Page
     private $totalCount;
 
     /**
-     * @param \Iterator $iterator
+     * @param \Iterator<int, T> $iterator
      * @param int $offset
      * @param int $limit
      * @param int $totalCount
@@ -68,7 +72,7 @@ class IteratorPage implements Page
             return 1;
         }
 
-        return floor($this->offset / $this->limit) + 1;
+        return (int) floor($this->offset / $this->limit) + 1;
     }
 
     /**
@@ -84,6 +88,7 @@ class IteratorPage implements Page
      */
     public function count()
     {
+        // @phpstan-ignore argument.type
         return count($this->iterator);
     }
 
@@ -97,6 +102,8 @@ class IteratorPage implements Page
 
     /**
      * {@inheritdoc}
+     *
+     * @return \Iterator<int, T>
      */
     public function getIterator()
     {

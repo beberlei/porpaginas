@@ -18,6 +18,9 @@ use Countable;
 
 /**
  * Interface for lazy paginators
+ *
+ * @template-covariant T
+ * @extends IteratorAggregate<int, T>
  */
 interface Page extends Countable, IteratorAggregate
 {
@@ -54,7 +57,7 @@ interface Page extends Countable, IteratorAggregate
     /**
      * Return an iterator over selected windows of results of the paginatable.
      *
-     * @return \Iterator
+     * @return \Iterator<int, T>
      */
     #[\ReturnTypeWillChange]
     public function getIterator();

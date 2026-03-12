@@ -5,8 +5,14 @@ namespace Porpaginas\Pagerfanta;
 use Pagerfanta\Adapter\AdapterInterface;
 use Porpaginas\Result;
 
+/**
+ * @implements AdapterInterface<mixed>
+ */
 class PorpaginasAdapter implements AdapterInterface
 {
+    /**
+     * @var Result<mixed>
+     */
     private $result;
 
     public function __construct(Result $result)
