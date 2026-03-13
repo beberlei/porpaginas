@@ -23,43 +23,31 @@ use ArrayIterator;
  */
 class ORMQueryPage implements Page
 {
-    /**
-     * @var Paginator<T>
-     */
+    /** @var Paginator<T> */
     private $paginator;
 
-    /**
-     * @var array<array-key, T>|null
-     */
+    /** @var array<array-key, T>|null */
     private $result;
 
-    /**
-     * @param Paginator<T> $paginator
-     */
+    /** @param Paginator<T> $paginator */
     public function __construct(Paginator $paginator)
     {
         $this->paginator = $paginator;
     }
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentOffset()
     {
         return $this->paginator->getQuery()->getFirstResult();
     }
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentPage()
     {
         return (int) floor($this->getCurrentOffset() / $this->getCurrentLimit()) + 1;
     }
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentLimit()
     {
         return $this->paginator->getQuery()->getMaxResults();

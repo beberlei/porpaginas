@@ -15,11 +15,9 @@ namespace Porpaginas\Doctrine\ORM;
 
 use Porpaginas\Arrays\ArrayPage;
 use Porpaginas\Result;
-
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-
 use ArrayIterator;
 
 /**
@@ -28,29 +26,21 @@ use ArrayIterator;
  */
 class ORMQueryResult implements Result
 {
-    /**
-     * @var Query
-     */
+    /** @var Query */
     private $query;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     private $fetchCollection;
 
-    /**
-     * @var array<array-key, T>|null
-     */
+    /** @var array<array-key, T>|null */
     private $result;
 
-    /**
-     * @var int|null
-     */
+    /** @var int|null */
     private $count;
 
     /**
      * @param Query|QueryBuilder $query
-     * @param bool $fetchCollection
+     * @param bool               $fetchCollection
      */
     public function __construct($query, $fetchCollection = true)
     {
@@ -74,7 +64,7 @@ class ORMQueryResult implements Result
                 array_slice($this->result, $offset, $limit),
                 $offset,
                 $limit,
-                count($this->result)
+                count($this->result),
             );
         }
 

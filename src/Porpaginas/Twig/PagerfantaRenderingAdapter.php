@@ -20,21 +20,17 @@ use Twig\Environment;
 
 class PagerfantaRenderingAdapter implements RenderingAdapter
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $viewName;
 
-    /**
-     * @var array<array-key, mixed>
-     */
+    /** @var array<array-key, mixed> */
     private $options;
 
     /**
-     * @param string|null $viewName
+     * @param string|null             $viewName
      * @param array<array-key, mixed> $options
      */
-    public function __construct($viewName = null, $options = array())
+    public function __construct($viewName = null, $options = [])
     {
         $this->viewName = $viewName;
         $this->options = $options;
@@ -54,7 +50,9 @@ class PagerfantaRenderingAdapter implements RenderingAdapter
         $extension = $method->invoke($environment, 'pagerfanta');
 
         return $extension->renderPagerfanta(
-            $pagerfanta, $this->viewName, $this->options
+            $pagerfanta,
+            $this->viewName,
+            $this->options,
         );
     }
 }

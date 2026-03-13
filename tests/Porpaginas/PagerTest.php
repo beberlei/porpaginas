@@ -2,44 +2,35 @@
 
 namespace Porpaginas;
 
-use Porpaginas\Pager;
 use PHPUnit\Framework\TestCase;
 
 final class PagerTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_gets_number_of_pages(): void
     {
         $pager = new Pager(95, 20, 1);
-        $this->assertEquals($pager->getPages(), array(1, 2, 3, 4,));
+        $this->assertEquals($pager->getPages(), [1, 2, 3, 4]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_handles_negative_page_numbers(): void
     {
         $pager = new Pager(95, 10, -42);
-        $this->assertEquals($pager->getPages(), array(1, 2, 3, 4,));
+        $this->assertEquals($pager->getPages(), [1, 2, 3, 4]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_handles_too_big_page_numbers(): void
     {
         $pager = new Pager(95, 10, 42);
-        $this->assertEquals($pager->getPages(), array(7, 8, 9, 10));
+        $this->assertEquals($pager->getPages(), [7, 8, 9, 10]);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_handles_empty_lists(): void
     {
         $pager = new Pager(0, 10, 42);
-        $this->assertEquals($pager->getPages(), array(1));
+        $this->assertEquals($pager->getPages(), [1]);
     }
 }

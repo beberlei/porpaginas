@@ -7,17 +7,14 @@ use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 use Porpaginas\Doctrine\ORM\ORMQueryResult;
-
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
 
-class DoctrineORMQueryTest extends AbstractResultTestCase
+class DoctrineORMQueryTest extends ResultTestCase
 {
-    /**
-     * @return Result<DoctrineOrmEntity>
-     */
+    /** @return Result<DoctrineOrmEntity> */
     protected function createResultWithItems(int $count): Result
     {
         $entityManager = $this->setupEntityManager();
@@ -35,14 +32,14 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
 
     private function setupEntityManager(): EntityManager
     {
-        $paths = array();
+        $paths = [];
         $isDevMode = false;
 
         // the connection configuration
-        $dbParams = array(
+        $dbParams = [
             'driver' => 'pdo_sqlite',
             'memory' => true,
-        );
+        ];
 
         $createConfigMethod = 'createAttributeMetadataConfig';
         // @phpstan-ignore-next-line compatibility with Doctrine ORM versions that do not have this method
@@ -65,9 +62,7 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
         $entityManager = new EntityManager($connection, $config);
 
         $schemaTool = new SchemaTool($entityManager);
-        $schemaTool->createSchema(array(
-            $entityManager->getClassMetadata(__NAMESPACE__ . '\\DoctrineOrmEntity')
-        ));
+        $schemaTool->createSchema([$entityManager->getClassMetadata(__NAMESPACE__ . '\\DoctrineOrmEntity')]);
 
         return $entityManager;
     }
@@ -76,7 +71,8 @@ class DoctrineORMQueryTest extends AbstractResultTestCase
 #[Entity]
 class DoctrineOrmEntity
 {
-    #[Id, Column(type: "integer"), GeneratedValue]
-    // @phpstan-ignore property.unused
-    private int $id;
+    #[Id]
+    #[Column(type: "integer")]
+    #[GeneratedValue]
+    public int $id;
 }

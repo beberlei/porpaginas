@@ -21,31 +21,23 @@ use Porpaginas\Page;
  */
 class IteratorPage implements Page
 {
-    /**
-     * @var \Iterator<array-key, T>&\Countable
-     */
+    /** @var \Iterator<array-key, T>&\Countable */
     private $iterator;
-    
-    /**
-     * @var int
-     */
+
+    /** @var int */
     private $offset;
-    
-    /**
-     * @var int
-     */
+
+    /** @var int */
     private $limit;
-    
-    /**
-     * @var int
-     */
+
+    /** @var int */
     private $totalCount;
 
     /**
      * @param \Iterator<array-key, T>&\Countable $iterator
-     * @param int $offset
-     * @param int $limit
-     * @param int $totalCount
+     * @param int                                $offset
+     * @param int                                $limit
+     * @param int                                $totalCount
      */
     public function __construct(\Iterator $iterator, $offset, $limit, $totalCount)
     {
@@ -56,7 +48,7 @@ class IteratorPage implements Page
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getCurrentOffset()
     {
@@ -64,11 +56,11 @@ class IteratorPage implements Page
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getCurrentPage()
     {
-        if (0 === $this->limit) {
+        if ($this->limit === 0) {
             return 1;
         }
 
@@ -76,7 +68,7 @@ class IteratorPage implements Page
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getCurrentLimit()
     {
@@ -84,7 +76,7 @@ class IteratorPage implements Page
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function count()
     {
@@ -92,7 +84,7 @@ class IteratorPage implements Page
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function totalCount()
     {
@@ -100,7 +92,7 @@ class IteratorPage implements Page
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getIterator()
     {

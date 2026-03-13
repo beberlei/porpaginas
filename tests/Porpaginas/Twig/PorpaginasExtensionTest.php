@@ -1,13 +1,12 @@
 <?php
 
 namespace Porpaginas\Twig;
+
 use PHPUnit\Framework\TestCase;
 
 class PorpaginasExtensionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_delegates_render_pagination_to_adapter(): void
     {
         $env = \Phake::mock('Twig\Environment');

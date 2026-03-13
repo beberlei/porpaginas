@@ -22,31 +22,23 @@ use ArrayIterator;
  */
 class ArrayPage implements Page
 {
-    /**
-     * @var array<array-key, T>
-     */
+    /** @var array<array-key, T> */
     private $slice;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $offset;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $limit;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $totalCount;
 
     /**
      * @param array<array-key, T> $slice
-     * @param int $offset
-     * @param int $limit
-     * @param int $totalCount
+     * @param int                 $offset
+     * @param int                 $limit
+     * @param int                 $totalCount
      */
     public function __construct(array $slice, $offset, $limit, $totalCount)
     {
@@ -56,25 +48,19 @@ class ArrayPage implements Page
         $this->totalCount = $totalCount;
     }
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentOffset()
     {
         return $this->offset;
     }
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentPage()
     {
         return (int) floor($this->offset / $this->limit) + 1;
     }
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentLimit()
     {
         return $this->limit;

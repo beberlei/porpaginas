@@ -14,16 +14,13 @@
 namespace Porpaginas\Twig;
 
 use Porpaginas\Page;
-
 use Twig\Extension;
 use Twig\Environment;
 use Twig\TwigFunction;
 
 class PorpaginasExtension extends Extension\AbstractExtension
 {
-    /**
-     * @var RenderingAdapter
-     */
+    /** @var RenderingAdapter */
     private $adapter;
 
     public function __construct(RenderingAdapter $adapter)
@@ -31,15 +28,13 @@ class PorpaginasExtension extends Extension\AbstractExtension
         $this->adapter = $adapter;
     }
 
-    /**
-     * @return array<int, TwigFunction>
-     */
+    /** @return array<int, TwigFunction> */
     public function getFunctions()
     {
-        return array(
-            new TwigFunction('porpaginas_render', array($this, 'renderPagination'), array('is_safe' => array('html'), 'needs_environment' => true)),
-            new TwigFunction('porpaginas_total', array($this, 'renderTotal')),
-        );
+        return [
+            new TwigFunction('porpaginas_render', [$this, 'renderPagination'], ['is_safe' => ['html'], 'needs_environment' => true]),
+            new TwigFunction('porpaginas_total', [$this, 'renderTotal']),
+        ];
     }
 
     /**
@@ -60,9 +55,7 @@ class PorpaginasExtension extends Extension\AbstractExtension
         return $page->totalCount();
     }
 
-    /**
-     * @return string
-     */
+    /** @return string */
     public function getName()
     {
         return 'Porpaginas';
