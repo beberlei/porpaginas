@@ -8,7 +8,7 @@ class PorpaginasExtensionTest extends TestCase
     /**
      * @test
      */
-    public function it_delegates_render_pagination_to_adapter()
+    public function it_delegates_render_pagination_to_adapter(): void
     {
         $env = \Phake::mock('Twig\Environment');
         $page = \Phake::mock('Porpaginas\Page');

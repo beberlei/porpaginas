@@ -3,13 +3,24 @@
 namespace Porpaginas\Pagerfanta;
 
 use Pagerfanta\Adapter\AdapterInterface;
+use Porpaginas\Page;
 use Porpaginas\Result;
 
+/**
+ * @template T
+ * @implements AdapterInterface<T>
+ */
 class PorpaginasAdapter implements AdapterInterface
 {
+    /**
+     * @var Result<T>|Page<T>
+     */
     private $result;
 
-    public function __construct(Result $result)
+    /**
+     * @param Result<T>|Page<T> $result
+     */
+    public function __construct(Result|Page $result)
     {
         $this->result = $result;
     }
@@ -21,6 +32,10 @@ class PorpaginasAdapter implements AdapterInterface
      */
     function getNbResults(): int
     {
+        if ($this->result instanceof Page) {
+            return $this->result->totalCount();
+        }
+
         return $this->result->take(0, 1)->totalCount();
     }
 
@@ -30,10 +45,14 @@ class PorpaginasAdapter implements AdapterInterface
      * @param integer $offset The offset.
      * @param integer $length The length.
      *
-     * @return array|\Traversable The slice.
+     * @return iterable<array-key, T> The slice.
      */
     function getSlice(int $offset, int $length): iterable
     {
+        if ($this->result instanceof Page) {
+            return iterator_to_array($this->result);
+        }
+
         return iterator_to_array($this->result->take($offset, $length));
     }
 }

@@ -15,10 +15,14 @@ namespace Porpaginas\Iterator;
 
 use Porpaginas\Page;
 
+/**
+ * @template T
+ * @implements Page<T>
+ */
 class IteratorPage implements Page
 {
     /**
-     * @var \Iterator
+     * @var \Iterator<array-key, T>&\Countable
      */
     private $iterator;
     
@@ -38,7 +42,7 @@ class IteratorPage implements Page
     private $totalCount;
 
     /**
-     * @param \Iterator $iterator
+     * @param \Iterator<array-key, T>&\Countable $iterator
      * @param int $offset
      * @param int $limit
      * @param int $totalCount
@@ -68,7 +72,7 @@ class IteratorPage implements Page
             return 1;
         }
 
-        return floor($this->offset / $this->limit) + 1;
+        return (int) floor($this->offset / $this->limit) + 1;
     }
 
     /**

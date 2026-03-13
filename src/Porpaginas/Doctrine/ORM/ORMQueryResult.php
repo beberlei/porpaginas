@@ -22,10 +22,14 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use ArrayIterator;
 
+/**
+ * @template T
+ * @implements Result<T>
+ */
 class ORMQueryResult implements Result
 {
     /**
-     * @var \Doctrine\ORM\Query
+     * @var Query
      */
     private $query;
 
@@ -35,7 +39,7 @@ class ORMQueryResult implements Result
     private $fetchCollection;
 
     /**
-     * @var array
+     * @var array<array-key, T>|null
      */
     private $result;
 
@@ -44,6 +48,10 @@ class ORMQueryResult implements Result
      */
     private $count;
 
+    /**
+     * @param Query|QueryBuilder $query
+     * @param bool $fetchCollection
+     */
     public function __construct($query, $fetchCollection = true)
     {
         if ($query instanceof QueryBuilder) {
@@ -56,7 +64,8 @@ class ORMQueryResult implements Result
 
     /**
      * @param int $offset
-     * @return \Porpaginas\Page
+     * @param int $limit
+     * @return \Porpaginas\Page<T>
      */
     public function take($offset, $limit)
     {
@@ -97,7 +106,7 @@ class ORMQueryResult implements Result
     /**
      * Return an iterator over all results of the paginatable.
      *
-     * @return Iterator
+     * @return ArrayIterator<array-key, T>
      */
     public function getIterator()
     {

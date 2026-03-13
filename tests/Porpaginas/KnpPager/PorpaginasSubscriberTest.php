@@ -12,7 +12,7 @@ class PorpaginasSubscriberTest extends TestCase
     /**
      * @test
      */
-    public function it_handles_and_converts_page()
+    public function it_handles_and_converts_page(): void
     {
         $argumentAccess = \Phake::mock(ArgumentAccessInterface::class);
         $event = new ItemsEvent(10, 10, $argumentAccess);

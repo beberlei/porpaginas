@@ -26,12 +26,16 @@ Central part of this library is the interface `Result`:
 <?php
 namespace Porpaginas;
 
+/**
+ * @template-covariant T
+ * @extends IteratorAggregate<array-key, T>
+ */
 interface Result extends Countable, IteratorAggregate
 {
     /**
      * @param int $offset
      * @param int $limit
-     * @return Page
+     * @return Page<T>
      */
     public function take($offset, $limit);
 
@@ -45,7 +49,7 @@ interface Result extends Countable, IteratorAggregate
     /**
      * Return an iterator over all results of the paginatable.
      *
-     * @return Iterator
+     * @return Traversable<array-key, T>
      */
     public function getIterator();
 }
@@ -64,6 +68,10 @@ looks like this:
 
 namespace Porpaginas;
 
+/**
+ * @template-covariant T
+ * @extends IteratorAggregate<array-key, T>
+ */
 interface Page extends Countable, IteratorAggregate
 {
     /**
@@ -83,7 +91,7 @@ interface Page extends Countable, IteratorAggregate
     /**
      * Return an iterator over selected windows of results of the paginatable.
      *
-     * @return Iterator
+     * @return Traversable<array-key, T>
      */
     public function getIterator();
 }
@@ -106,7 +114,7 @@ Take the following example using Doctrine ORM:
 class UserRepository extends EntityRepository
 {
     /**
-     * @return \Porpaginas\Result
+     * @return \Porpaginas\Result<User>
      */
     public function findAllUsers()
     {
@@ -140,6 +148,7 @@ class UserController
         return array('users' => $paginator);
     }
 }
+
 ```
 
 Now in the template for `porpaginasListAction` using the `porpaginas` Twig

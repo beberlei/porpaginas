@@ -10,7 +10,7 @@ final class PagerTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_number_of_pages()
+    public function it_gets_number_of_pages(): void
     {
         $pager = new Pager(95, 20, 1);
         $this->assertEquals($pager->getPages(), array(1, 2, 3, 4,));
@@ -19,7 +19,7 @@ final class PagerTest extends TestCase
     /**
      * @test
      */
-    public function it_handles_negative_page_numbers()
+    public function it_handles_negative_page_numbers(): void
     {
         $pager = new Pager(95, 10, -42);
         $this->assertEquals($pager->getPages(), array(1, 2, 3, 4,));
@@ -28,7 +28,7 @@ final class PagerTest extends TestCase
     /**
      * @test
      */
-    public function it_handles_too_big_page_numbers()
+    public function it_handles_too_big_page_numbers(): void
     {
         $pager = new Pager(95, 10, 42);
         $this->assertEquals($pager->getPages(), array(7, 8, 9, 10));
@@ -37,7 +37,7 @@ final class PagerTest extends TestCase
     /**
      * @test
      */
-    public function it_handles_empty_lists()
+    public function it_handles_empty_lists(): void
     {
         $pager = new Pager(0, 10, 42);
         $this->assertEquals($pager->getPages(), array(1));

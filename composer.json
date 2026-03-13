@@ -24,7 +24,11 @@
         "twig/twig": "@stable",
         "phake/phake": "@stable",
         "phpunit/phpunit": "^7|^8|^9",
-        "symfony/cache": "@stable"
+        "symfony/cache": "@stable",
+        "phpstan/phpstan": "^2.1"
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse --debug"
     },
     "suggest": {
         "pagerfanta/pagerfanta": "For rendering pagination with Pagerfanta"

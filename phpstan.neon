@@ -1,0 +1,17 @@
+parameters:
+    level: 6
+    paths:
+        - src
+        - tests
+    ignoreErrors:
+        -
+            message: '#Call to an undefined method Phake\\Proxies\\StubberProxy::getExtension\(\)#'
+            path: tests/Porpaginas/Twig/KnpPagerRenderingAdapterTest.php
+        -
+            message: '#Call to an undefined method Phake\\Proxies\\VerifierProxy::render\(\)#'
+            path: tests/Porpaginas/Twig/KnpPagerRenderingAdapterTest.php
+        -
+            message: '#Call to an undefined method Phake\\Proxies\\VerifierProxy::renderPagination\(\)#'
+            path: tests/Porpaginas/Twig/PorpaginasExtensionTest.php
+    parallel:
+        maximumNumberOfProcesses: 1

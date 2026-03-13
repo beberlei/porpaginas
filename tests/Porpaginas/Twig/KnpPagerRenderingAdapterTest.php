@@ -16,7 +16,7 @@ class KnpPagerRenderingAdapterTest extends TestCase
     /**
      * @test
      */
-    public function it_renders_pagination_delegating_to_twig_knppagination()
+    public function it_renders_pagination_delegating_to_twig_knppagination(): void
     {
         $env = \Phake::mock('Twig\Environment');
         $extension = \Phake::mock('Porpaginas\Twig\KnpPaginationExtension');
@@ -49,11 +49,16 @@ class KnpPagerRenderingAdapterTest extends TestCase
 
 class KnpPaginationExtension extends \Twig\Extension\AbstractExtension
 {
+    /**
+     * @param mixed $items
+     * @param mixed $template
+     * @return void
+     */
     public function render($items, $template)
     {
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'knp_pagination';
     }
