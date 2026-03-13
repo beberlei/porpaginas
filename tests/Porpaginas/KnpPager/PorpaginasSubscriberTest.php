@@ -9,19 +9,17 @@ use Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface;
 
 class PorpaginasSubscriberTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_handles_and_converts_page(): void
     {
         $argumentAccess = \Phake::mock(ArgumentAccessInterface::class);
         $event = new ItemsEvent(10, 10, $argumentAccess);
-        $event->target = new ArrayPage(array(1, 2), 10, 10, 2);
+        $event->target = new ArrayPage([1, 2], 10, 10, 2);
 
         $subscriber = new PorpaginasSubscriber();
         $subscriber->items($event);
 
         $this->assertEquals(2, $event->count);
-        $this->assertEquals(array(1, 2), iterator_to_array($event->items));
+        $this->assertEquals([1, 2], iterator_to_array($event->items));
     }
 }

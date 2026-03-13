@@ -4,19 +4,13 @@ namespace Porpaginas;
 
 final class Pager
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $totalCount;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $limit;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $currentPage;
 
     /**
@@ -58,9 +52,7 @@ final class Pager
         return range($this->getSliceStart($siblings), $this->getSliceEnd($siblings));
     }
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getNumberOfPages()
     {
         return (int) ceil($this->totalCount / $this->limit) ?: 1;
@@ -74,7 +66,7 @@ final class Pager
     {
         return min(
             max(1, $this->getNumberOfPages() - $siblings),
-            max(1, $this->currentPage - $siblings)
+            max(1, $this->currentPage - $siblings),
         );
     }
 

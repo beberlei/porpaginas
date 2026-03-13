@@ -8,38 +8,34 @@ use PHPUnit\Framework\TestCase;
 
 class PorpaginasAdapterTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_counts_total_number_of_results(): void
     {
         $pagerfanta = new Pagerfanta(
             new PorpaginasAdapter(
-                new ArrayResult(array(1, 2, 3, 4))
-            )
+                new ArrayResult([1, 2, 3, 4]),
+            ),
         );
 
         $this->assertEquals(4, $pagerfanta->getNbResults());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_iterates_slice(): void
     {
         $pagerfanta = new Pagerfanta(
             new PorpaginasAdapter(
-                new ArrayResult(array(1, 2, 3, 4))
-            )
+                new ArrayResult([1, 2, 3, 4]),
+            ),
         );
 
         $pagerfanta->setMaxPerPage(2);
         $pagerfanta->setCurrentPage(1);
 
-        $this->assertEquals(array(1, 2), $pagerfanta->getCurrentPageResults());
+        $this->assertEquals([1, 2], $pagerfanta->getCurrentPageResults());
 
         $pagerfanta->setCurrentPage(2);
 
-        $this->assertEquals(array(3, 4), $pagerfanta->getCurrentPageResults());
+        $this->assertEquals([3, 4], $pagerfanta->getCurrentPageResults());
     }
 }

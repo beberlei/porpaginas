@@ -6,9 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractResultTestCase extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_counts_total_items(): void
     {
         $result = $this->createResultWithItems(2);
@@ -16,9 +14,7 @@ abstract class AbstractResultTestCase extends TestCase
         $this->assertCount(2, $result);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_iterates_over_all_items(): void
     {
         $result = $this->createResultWithItems(11);
@@ -26,9 +22,7 @@ abstract class AbstractResultTestCase extends TestCase
         $this->assertCount(11, iterator_to_array($result));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_takes_slice_as_page(): void
     {
         $result = $this->createResultWithItems(11);
@@ -42,9 +36,7 @@ abstract class AbstractResultTestCase extends TestCase
         $this->assertEquals(11, $page->totalCount());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_counts_last_page_of_slice_correctly(): void
     {
         $result = $this->createResultWithItems(11);
@@ -57,9 +49,7 @@ abstract class AbstractResultTestCase extends TestCase
         $this->assertCount(1, $page);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_counts_page_first_then_iterates(): void
     {
         $result = $this->createResultWithItems(16);
@@ -70,9 +60,7 @@ abstract class AbstractResultTestCase extends TestCase
         $this->assertCount(5, iterator_to_array($page));
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_itereates_first_then_counts_page(): void
     {
         $result = $this->createResultWithItems(16);
@@ -83,8 +71,6 @@ abstract class AbstractResultTestCase extends TestCase
         $this->assertCount(5, $page);
     }
 
-    /**
-     * @return Result<mixed>
-     */
+    /** @return Result<mixed> */
     abstract protected function createResultWithItems(int $count): Result;
 }

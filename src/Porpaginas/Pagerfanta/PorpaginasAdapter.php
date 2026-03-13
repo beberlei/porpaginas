@@ -12,14 +12,10 @@ use Porpaginas\Result;
  */
 class PorpaginasAdapter implements AdapterInterface
 {
-    /**
-     * @var Result<T>|Page<T>
-     */
+    /** @var Result<T>|Page<T> */
     private $result;
 
-    /**
-     * @param Result<T>|Page<T> $result
-     */
+    /** @param Result<T>|Page<T> $result */
     public function __construct(Result|Page $result)
     {
         $this->result = $result;
@@ -28,7 +24,7 @@ class PorpaginasAdapter implements AdapterInterface
     /**
      * Returns the number of results.
      *
-     * @return integer The number of results.
+     * @return int The number of results.
      */
     function getNbResults(): int
     {
@@ -42,8 +38,8 @@ class PorpaginasAdapter implements AdapterInterface
     /**
      * Returns an slice of the results.
      *
-     * @param integer $offset The offset.
-     * @param integer $length The length.
+     * @param int $offset The offset.
+     * @param int $length The length.
      *
      * @return iterable<array-key, T> The slice.
      */

@@ -22,14 +22,10 @@ use ArrayIterator;
  */
 class ArrayResult implements Result
 {
-    /**
-     * @var array<array-key, T>
-     */
+    /** @var array<array-key, T> */
     private $data;
 
-    /**
-     * @param array<array-key, T> $data
-     */
+    /** @param array<array-key, T> $data */
     public function __construct(array $data)
     {
         $this->data = $data;
@@ -46,7 +42,7 @@ class ArrayResult implements Result
             array_slice($this->data, $offset, $limit),
             $offset,
             $limit,
-            count($this->data)
+            count($this->data),
         );
     }
 

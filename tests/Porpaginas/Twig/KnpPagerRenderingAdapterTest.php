@@ -9,13 +9,10 @@ use Knp\Component\Pager\Pagination\SlidingPagination;
 use Porpaginas\Arrays\ArrayPage;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Contracts\EventDispatcher\Event;
 
 class KnpPagerRenderingAdapterTest extends TestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function it_renders_pagination_delegating_to_twig_knppagination(): void
     {
         $env = \Phake::mock('Twig\Environment');
@@ -39,7 +36,7 @@ class KnpPagerRenderingAdapterTest extends TestCase
         });
 
         $adapter = new KnpPagerRenderingAdapter($paginator);
-        $page = new ArrayPage(array(1, 2), 10, 10, 2);
+        $page = new ArrayPage([1, 2], 10, 10, 2);
 
         $adapter->renderPagination($page, $env);
 

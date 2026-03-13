@@ -24,19 +24,13 @@ use Countable;
  */
 interface Page extends Countable, IteratorAggregate
 {
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentOffset();
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentPage();
 
-    /**
-     * @return int
-     */
+    /** @return int */
     public function getCurrentLimit();
 
     /**
