@@ -74,5 +74,5 @@ class DoctrineOrmEntity
     #[Id]
     #[Column(type: "integer")]
     #[GeneratedValue]
-    private int $id;
+    public int $id;
 }
