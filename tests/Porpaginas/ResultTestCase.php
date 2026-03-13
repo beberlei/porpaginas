@@ -4,7 +4,7 @@ namespace Porpaginas;
 
 use PHPUnit\Framework\TestCase;
 
-abstract class AbstractResultTestCase extends TestCase
+abstract class ResultTestCase extends TestCase
 {
     /** @test */
     public function it_counts_total_items(): void

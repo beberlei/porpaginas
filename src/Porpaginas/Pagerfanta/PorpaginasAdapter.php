@@ -26,7 +26,7 @@ class PorpaginasAdapter implements AdapterInterface
      *
      * @return int The number of results.
      */
-    function getNbResults(): int
+    public function getNbResults(): int
     {
         if ($this->result instanceof Page) {
             return $this->result->totalCount();
@@ -43,7 +43,7 @@ class PorpaginasAdapter implements AdapterInterface
      *
      * @return iterable<array-key, T> The slice.
      */
-    function getSlice(int $offset, int $length): iterable
+    public function getSlice(int $offset, int $length): iterable
     {
         if ($this->result instanceof Page) {
             return iterator_to_array($this->result);

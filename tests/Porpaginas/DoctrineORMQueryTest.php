@@ -12,7 +12,7 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
 
-class DoctrineORMQueryTest extends AbstractResultTestCase
+class DoctrineORMQueryTest extends ResultTestCase
 {
     /** @return Result<DoctrineOrmEntity> */
     protected function createResultWithItems(int $count): Result
